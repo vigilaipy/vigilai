@@ -4,6 +4,7 @@ import random
 
 ins = Inspector()
 
+
 # 1. Auto Retry Example
 @ins.reliable(retries=3, timeout_sec=1)
 def flaky_api_call() -> str:
@@ -12,17 +13,20 @@ def flaky_api_call() -> str:
         raise ConnectionError("Network timeout!")
     return "API response successful"
 
+
 # 2. Fallback Chain Example
 def primary_model() -> str:
     raise RuntimeError("Primary model is down")
 
+
 def fallback_model() -> str:
     return "Response from fallback model"
+
 
 # 3. Infinite Loop Guard Example
 def run_agent() -> None:
     guard = LoopGuard(max_iterations=5)
-    
+
     while True:
         try:
             guard.tick()
@@ -31,6 +35,7 @@ def run_agent() -> None:
             print(f"Agent stopped: {e}")
             break
 
+
 def main() -> None:
     print("--- Retry ---")
     try:
@@ -38,13 +43,14 @@ def main() -> None:
         print(f"Result: {result}")
     except Exception as e:
         print(f"Final failure: {e}")
-        
+
     print("\n--- Fallback ---")
     chain = FallbackChain([primary_model, fallback_model])
     print(f"Result: {chain.execute()}")
-    
+
     print("\n--- Loop Guard ---")
     run_agent()
+
 
 if __name__ == "__main__":
     main()

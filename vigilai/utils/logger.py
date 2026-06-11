@@ -10,12 +10,13 @@ __all__ = ["Logger"]
 
 console = Console()
 
+
 class Logger:
     """Local structured logger that writes to JSONL files and rich console."""
 
     def __init__(self, log_dir: str = "~/.vigilai/logs", redact: bool = False) -> None:
         """Initialize the logger.
-        
+
         Args:
             log_dir: Directory where the logs will be stored.
             redact: Whether to automatically mask PII in logs (placeholder behavior).
@@ -33,11 +34,11 @@ class Logger:
             "message": message,
             **kwargs,
         }
-        
+
         # Simple placeholder for redaction
         if self.redact and "text" in log_entry:
             log_entry["text"] = "[REDACTED]"
-            
+
         try:
             with open(self.log_file, "a", encoding="utf-8") as f:
                 f.write(json.dumps(log_entry) + "\n")

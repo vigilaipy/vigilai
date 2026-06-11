@@ -2,12 +2,13 @@ import tiktoken
 
 __all__ = ["TokenCounter"]
 
+
 class TokenCounter:
     """Utility to count tokens using tiktoken."""
 
     def __init__(self, model: str = "gpt-4o") -> None:
         """Initialize the token counter.
-        
+
         Args:
             model: The model name to use for token encoding.
         """
@@ -20,10 +21,10 @@ class TokenCounter:
 
     def count(self, text: str) -> int:
         """Count the number of tokens in the given text.
-        
+
         Args:
             text: The text to count tokens for.
-            
+
         Returns:
             The number of tokens.
         """
