@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vigilai"
+version = "0.1.0"
+description = "A developer-first AI observability, security, and reliability toolkit for LLM applications and AI agents."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "VigilAi Contributors" }
+]
+dependencies = [
+    "tiktoken>=0.7.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "typing-extensions>=4.0.0"
+]
+
+[project.optional-dependencies]
+security = [
+    "presidio-analyzer>=2.2.0",
+    "presidio-anonymizer>=2.2.0"
+]
+full = [
+    "presidio-analyzer>=2.2.0",
+    "presidio-anonymizer>=2.2.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/vigilai/vigilai"
+Documentation = "https://github.com/vigilai/vigilai/tree/main/docs"
+Repository = "https://github.com/vigilai/vigilai"
+
+[tool.hatch.build.targets.wheel]
+packages = ["vigilai"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --asyncio-mode=auto"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311', 'py312']
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
