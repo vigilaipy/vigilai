@@ -49,5 +49,11 @@ class PIIScanner:
             entities.append("SSN")
         if re.search(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", text):
             entities.append("EMAIL_ADDRESS")
+        if re.search(r"\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}", text):
+            entities.append("PHONE_NUMBER")
+        if re.search(r"\b\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}\b", text):
+            entities.append("CREDIT_CARD")
+        if re.search(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", text):
+            entities.append("IP_ADDRESS")
 
         return PIIResult(has_pii=len(entities) > 0, entities_found=entities)

@@ -23,6 +23,9 @@ def test_token_counter() -> None:
     count = counter.count("Hello, world!")
     assert count > 0
 
+    count_claude = counter.count_tokens("Hello, world!", "claude-sonnet-4-6")
+    assert count_claude == 3  # 13 chars // 4 = 3
+
 
 def test_cost_tracker() -> None:
     tracker = CostTracker("gpt-4o")

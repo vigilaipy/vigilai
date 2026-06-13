@@ -20,6 +20,13 @@ class InjectionScanner:
     # Simple heuristic patterns for demonstration
     INJECTION_PATTERNS = [
         r"(?i)ignore\s+all\s+previous\s+instructions",
+        r"(?i)ignore\s+the\s+above",
+        r"(?i)you\s+are\s+now\s+in\s+developer\s+mode",
+        r"(?i)dan\s+mode",
+        r"(?i)repeat\s+your\s+system\s+prompt",
+        r"(?i)what\s+were\s+your\s+instructions",
+        r"```",
+        r"<\/?\w+>",
         r"(?i)system\s+prompt",
         r"(?i)you\s+are\s+now",
         r"(?i)forget\s+everything",
