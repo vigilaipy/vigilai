@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "vigilai"
+name = "vigilaipy"
 version = "0.1.0"
 description = "A developer-first AI observability, security, and reliability toolkit for LLM applications and AI agents."
 readme = "README.md"
@@ -17,6 +17,15 @@ dependencies = [
     "pydantic>=2.0.0",
     "rich>=13.0.0",
     "typing-extensions>=4.0.0"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 
 [project.optional-dependencies]

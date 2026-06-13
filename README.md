@@ -29,14 +29,17 @@ Install `vigilai` using pip. Choose the installation tier that fits your needs:
 
 ```bash
 # Core features (observability & reliability)
-pip install vigilai
+pip install vigilaipy
 
 # Include security scanning (PII, secrets, injection detection)
-pip install "vigilai[security]"
+pip install "vigilaipy[security]"
 
 # Full installation
-pip install "vigilai[full]"
+pip install "vigilaipy[full]"
 ```
+
+> [!NOTE]
+> The PyPI package is named `vigilaipy`, but you import it as `vigilai` in your code.
 
 ## Quick Start
 
