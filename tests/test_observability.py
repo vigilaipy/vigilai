@@ -4,7 +4,7 @@ from vigilai.observability import Tracer, TokenCounter, CostTracker
 
 def test_tracer() -> None:
     tracer = Tracer()
-    with tracer.trace("test_span", metadata={"key": "value"}) as span:
+    with tracer.trace("test_span", metadata={"key": "value"}):
         time.sleep(0.01)
 
     assert len(tracer.spans) == 1

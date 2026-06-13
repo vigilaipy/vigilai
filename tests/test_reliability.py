@@ -1,5 +1,4 @@
 import pytest
-import time
 from vigilai.reliability import retry, FallbackChain, LoopGuard
 
 

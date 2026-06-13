@@ -1,6 +1,6 @@
 import time
 from dataclasses import dataclass
-from typing import Any, Dict, Optional, ContextManager
+from typing import Any, Dict, Optional
 from contextlib import contextmanager
 
 __all__ = ["Tracer", "Span"]
