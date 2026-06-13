@@ -1,6 +1,8 @@
-import time
+from __future__ import annotations
+
 import functools
 import threading
+import time
 from typing import Any, Callable, TypeVar, cast
 
 __all__ = ["retry", "TimeoutException"]
@@ -19,7 +21,8 @@ def retry(retries: int = 3, timeout_sec: int = 30) -> Callable[[T], T]:
 
     Args:
         retries: Number of retry attempts.
-        timeout_sec: Maximum execution time allowed for a single attempt in seconds. (0 for no timeout)
+        timeout_sec: Maximum execution time allowed for a single attempt
+                     in seconds. (0 for no timeout)
 
     Returns:
         The decorated function.

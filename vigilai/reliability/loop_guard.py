@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 __all__ = ["LoopGuard"]
 
 
@@ -22,7 +24,8 @@ class LoopGuard:
         self.current_iteration += 1
         if self.current_iteration > self.max_iterations:
             raise RuntimeError(
-                f"Infinite loop detected! Max iterations ({self.max_iterations}) exceeded."
+                f"Infinite loop detected! Max iterations "
+                f"({self.max_iterations}) exceeded."
             )
 
     def reset(self) -> None:

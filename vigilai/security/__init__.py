@@ -1,8 +1,10 @@
 """Security module."""
 
-from .pii_scanner import PIIScanner, PIIResult
-from .secret_scanner import SecretScanner, SecretResult
-from .injection_scanner import InjectionScanner, InjectionResult
+from __future__ import annotations
+
+from .injection_scanner import InjectionResult, InjectionScanner
+from .pii_scanner import PIIResult, PIIScanner
+from .secret_scanner import SecretResult, SecretScanner
 
 __all__ = [
     "PIIScanner",

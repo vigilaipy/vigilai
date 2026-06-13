@@ -1,6 +1,9 @@
+from __future__ import annotations
+
+import random
+
 from vigilai import Inspector
 from vigilai.reliability import FallbackChain, LoopGuard
-import random
 
 ins = Inspector()
 

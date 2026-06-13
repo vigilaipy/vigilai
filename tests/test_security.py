@@ -1,4 +1,6 @@
-from vigilai.security import PIIScanner, SecretScanner, InjectionScanner
+from __future__ import annotations
+
+from vigilai.security import InjectionScanner, PIIScanner, SecretScanner
 
 
 def test_pii_scanner() -> None:

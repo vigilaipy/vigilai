@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import time
-from vigilai.observability import Tracer, TokenCounter, CostTracker
+
+from vigilai.observability import CostTracker, TokenCounter, Tracer
 
 
 def test_tracer() -> None:

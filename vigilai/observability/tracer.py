@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 import time
+from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
-from contextlib import contextmanager
 
 __all__ = ["Tracer", "Span"]
 

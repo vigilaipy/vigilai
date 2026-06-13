@@ -1,7 +1,9 @@
 """Observability module."""
 
-from .tracer import Tracer, Span
+from __future__ import annotations
+
+from .cost_tracker import CostStats, CostTracker
 from .token_counter import TokenCounter
-from .cost_tracker import CostTracker, CostStats
+from .tracer import Span, Tracer
 
 __all__ = ["Tracer", "Span", "TokenCounter", "CostTracker", "CostStats"]

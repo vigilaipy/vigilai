@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import pytest
-from vigilai.reliability import retry, FallbackChain, LoopGuard
+
+from vigilai.reliability import FallbackChain, LoopGuard, retry
 
 
 def test_retry_success() -> None:

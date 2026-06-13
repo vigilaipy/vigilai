@@ -1,5 +1,8 @@
-from vigilai import Inspector
+from __future__ import annotations
+
 import time
+
+from vigilai import Inspector
 
 
 def main() -> None:

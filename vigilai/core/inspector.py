@@ -1,9 +1,11 @@
-import os
-from typing import Any, Callable, Dict, List, Optional, ContextManager
+from __future__ import annotations
 
-from ..observability import Tracer, TokenCounter, CostTracker, Span
-from ..security import PIIScanner, SecretScanner, InjectionScanner
+import os
+from typing import Any, Callable, ContextManager, Dict, List, Optional
+
+from ..observability import CostTracker, Span, TokenCounter, Tracer
 from ..reliability import retry
+from ..security import InjectionScanner, PIIScanner, SecretScanner
 from ..utils.logger import Logger
 
 __all__ = ["Inspector"]

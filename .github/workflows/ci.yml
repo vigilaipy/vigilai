@@ -28,13 +28,13 @@ jobs:
         pip install pytest pytest-asyncio black ruff mypy
         
     - name: Check code formatting with black
-      run: black --check .
+      run: python -m black --check .
       
     - name: Lint with ruff
-      run: ruff check .
+      run: python -m ruff check .
       
     - name: Type check with mypy
-      run: mypy vigilai
+      run: python -m mypy vigilai
       
     - name: Run tests
-      run: pytest tests/
+      run: python -m pytest tests/

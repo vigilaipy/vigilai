@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 from typing import List
+
 from pydantic import BaseModel
 
 __all__ = ["PIIScanner", "PIIResult"]
@@ -18,7 +21,7 @@ class PIIScanner:
         """Initialize the PII Scanner. Uses presidio if available."""
         self.analyzer = None
         try:
-            import presidio_analyzer  
+            import presidio_analyzer
 
             self.analyzer = presidio_analyzer.AnalyzerEngine()
         except ImportError:
