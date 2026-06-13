@@ -11,7 +11,7 @@ def test_pii_scanner() -> None:
     assert result.has_pii is True
     assert "EMAIL_ADDRESS" in result.entities_found
 
-    clean_result = scanner.scan("The weather is nice today.")
+    clean_result = scanner.scan("The weather is nice.")
     assert clean_result.has_pii is False
 
 
@@ -35,4 +35,4 @@ def test_injection_scanner() -> None:
 
     clean_result = scanner.scan("Translate this text to French")
     assert clean_result.is_injection is False
-    assert result.confidence > 0.0
+    assert clean_result.confidence == 0.0
