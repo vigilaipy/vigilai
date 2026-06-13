@@ -18,9 +18,9 @@ class PIIScanner:
         """Initialize the PII Scanner. Uses presidio if available."""
         self.analyzer = None
         try:
-            from presidio_analyzer import AnalyzerEngine  # type: ignore
+            import presidio_analyzer  
 
-            self.analyzer = AnalyzerEngine()
+            self.analyzer = presidio_analyzer.AnalyzerEngine()
         except ImportError:
             pass
 

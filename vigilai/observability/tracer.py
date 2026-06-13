@@ -43,6 +43,8 @@ class Tracer:
             span.status = "success"
         except Exception as e:
             span.status = "error"
+            if span.metadata is None:
+                span.metadata = {}
             span.metadata["error"] = str(e)
             raise
         finally:
