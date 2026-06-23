@@ -3,7 +3,15 @@
 from __future__ import annotations
 
 from .cost_tracker import CostStats, CostTracker
+from .otel_exporter import OTelExporter
 from .token_counter import TokenCounter
 from .tracer import Span, Tracer
 
-__all__ = ["Tracer", "Span", "TokenCounter", "CostTracker", "CostStats"]
+__all__ = [
+    "Tracer",
+    "Span",
+    "TokenCounter",
+    "CostTracker",
+    "CostStats",
+    "OTelExporter",
+]

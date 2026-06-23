@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "vigilaipy"
-version = "0.2.0"
+version = "0.3.0"
 description = "A developer-first AI observability, security, and reliability toolkit for LLM applications and AI agents."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -33,9 +33,17 @@ security = [
     "presidio-analyzer>=2.2.0",
     "presidio-anonymizer>=2.2.0"
 ]
+otel = [
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.20.0"
+]
 full = [
     "presidio-analyzer>=2.2.0",
-    "presidio-anonymizer>=2.2.0"
+    "presidio-anonymizer>=2.2.0",
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.20.0"
 ]
 
 [project.urls]

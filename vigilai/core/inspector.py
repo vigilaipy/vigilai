@@ -160,6 +160,7 @@ class Inspector:
         """
         total_latency = sum(span.duration for span in self.tracer.spans)
         cost_stats = self.cost_tracker.get_stats()
+        percentiles = self.tracer.latency_percentiles()
 
         summary = {
             "spans_recorded": len(self.tracer.spans),
@@ -169,6 +170,13 @@ class Inspector:
             "budget_remaining_usd": max(
                 0.0, self.spend_limit_usd - cost_stats.total_cost_usd
             ),
+            "latency_p50_sec": percentiles["p50"],
+            "latency_p75_sec": percentiles["p75"],
+            "latency_p95_sec": percentiles["p95"],
+            "latency_p99_sec": percentiles["p99"],
+            "latency_mean_sec": percentiles["mean"],
+            "latency_min_sec": percentiles["min"],
+            "latency_max_sec": percentiles["max"],
         }
         self.logger.info("Stats generated", summary=summary)
         return summary
@@ -277,6 +285,40 @@ class Inspector:
                 </div>
 
                 <div class="card">
+                    <h2>Latency Percentiles</h2>
+                    <div class="summary-grid">
+                        <div>
+                            <div>p50</div>
+                            <div class="stat">{stats['latency_p50_sec']:.3f}s</div>
+                        </div>
+                        <div>
+                            <div>p75</div>
+                            <div class="stat">{stats['latency_p75_sec']:.3f}s</div>
+                        </div>
+                        <div>
+                            <div>p95</div>
+                            <div class="stat">{stats['latency_p95_sec']:.3f}s</div>
+                        </div>
+                        <div>
+                            <div>p99</div>
+                            <div class="stat">{stats['latency_p99_sec']:.3f}s</div>
+                        </div>
+                        <div>
+                            <div>Mean</div>
+                            <div class="stat">{stats['latency_mean_sec']:.3f}s</div>
+                        </div>
+                        <div>
+                            <div>Min</div>
+                            <div class="stat">{stats['latency_min_sec']:.3f}s</div>
+                        </div>
+                        <div>
+                            <div>Max</div>
+                            <div class="stat">{stats['latency_max_sec']:.3f}s</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
                     <h2>Cost per Span (Estimated)</h2>
                     <svg width="100%" height="{svg_height}">
                         {svg_bars}
@@ -300,16 +342,28 @@ class Inspector:
         self.logger.info(f"Report generated at {report_path}")
         return str(report_path)
 
-    def export(self, format: str, path: Optional[str] = None) -> str:
-        """Export spans to a file.
+    def export(
+        self,
+        format: str,
+        path: Optional[str] = None,
+        otel_endpoint: str = "http://localhost:4317",
+    ) -> str:
+        """Export spans to a file or OpenTelemetry collector.
 
         Args:
-            format: 'json' or 'csv'
-            path: Optional file path.
+            format: 'json', 'csv', or 'otel'
+            path: Optional file path for json/csv.
+            otel_endpoint: OTLP endpoint for format="otel".
 
         Returns:
-            The path of the exported file.
+            The path of the exported file, or 'exported' for otel.
         """
+        if format == "otel":
+            from ..observability.otel_exporter import OTelExporter
+
+            exporter = OTelExporter(endpoint=otel_endpoint)
+            return exporter.export(self.tracer.spans)
+
         if path is None:
             path = os.path.join(self.logger.log_dir, f"export.{format}")
 

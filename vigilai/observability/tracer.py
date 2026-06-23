@@ -52,3 +52,44 @@ class Tracer:
         finally:
             span.end_time = time.time()
             span.duration = span.end_time - span.start_time
+
+    def latency_percentiles(self) -> Dict[str, float]:
+        """Calculate latency percentiles and statistics."""
+        completed_spans = [
+            s.duration for s in self.spans if s.status in ("success", "error")
+        ]
+        if not completed_spans:
+            return {
+                "p50": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "p99": 0.0,
+                "mean": 0.0,
+                "min": 0.0,
+                "max": 0.0,
+                "count": 0.0,
+            }
+
+        completed_spans.sort()
+        count = len(completed_spans)
+
+        def _percentile(p: float) -> float:
+            k = (count - 1) * p
+            f = int(k)
+            c = f + 1
+            if c >= count:
+                return completed_spans[-1]
+            return completed_spans[f] + (k - f) * (
+                completed_spans[c] - completed_spans[f]
+            )
+
+        return {
+            "p50": _percentile(0.50),
+            "p75": _percentile(0.75),
+            "p95": _percentile(0.95),
+            "p99": _percentile(0.99),
+            "mean": sum(completed_spans) / count,
+            "min": completed_spans[0],
+            "max": completed_spans[-1],
+            "count": float(count),
+        }
